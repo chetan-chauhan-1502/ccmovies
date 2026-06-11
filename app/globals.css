@@ -1,26 +1,319 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ========================================
+CCMOVIES PREMIUM MONOCHROME THEME
+======================================== */
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #0a0a0a;
+
+  --card: #ffffff;
+  --card-foreground: #111111;
+
+  --popover: #ffffff;
+  --popover-foreground: #111111;
+
+  --primary: #000000;
+  --primary-foreground: #ffffff;
+
+  --secondary: #f4f4f5;
+  --secondary-foreground: #111111;
+
+  --accent: #f4f4f5;
+  --accent-foreground: #111111;
+
+  --muted: #f8f8f8;
+  --muted-foreground: #71717a;
+
+  --border: #e4e4e7;
+  --input: #f4f4f5;
+  --ring: #000000;
+
+  --destructive: #ef4444;
+
+  --radius: 1rem;
+}
+
+.dark {
+  --background: #050505;
+  --foreground: #fafafa;
+
+  --card: #0f0f0f;
+  --card-foreground: #fafafa;
+
+  --popover: #0f0f0f;
+  --popover-foreground: #fafafa;
+
+  --primary: #ffffff;
+  --primary-foreground: #000000;
+
+  --secondary: #18181b;
+  --secondary-foreground: #fafafa;
+
+  --accent: #27272a;
+  --accent-foreground: #fafafa;
+
+  --muted: #18181b;
+  --muted-foreground: #a1a1aa;
+
+  --border: #27272a;
+  --input: #18181b;
+  --ring: #ffffff;
+
+  --destructive: #dc2626;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-destructive: var(--destructive);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ========================================
+GLOBAL
+======================================== */
+
+* {
+  border-color: var(--border);
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
+  min-height: 100vh;
+
+  background:
+    radial-gradient(circle at top left, rgba(0, 0, 0, 0.04), transparent 35%),
+    radial-gradient(
+      circle at bottom right,
+      rgba(0, 0, 0, 0.03),
+      transparent 40%
+    ),
+    var(--background);
+
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+
+  font-family: var(--font-geist-sans), Arial, sans-serif;
+
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+.dark body {
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(255, 255, 255, 0.04),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      rgba(255, 255, 255, 0.03),
+      transparent 40%
+    ),
+    var(--background);
+}
+
+/* ========================================
+SELECTION
+======================================== */
+
+::selection {
+  background: #000;
+  color: #fff;
+}
+
+.dark ::selection {
+  background: #fff;
+  color: #000;
+}
+
+/* ========================================
+SCROLLBAR
+======================================== */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #404040, #18181b);
+
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #000, #525252);
+}
+
+/* ========================================
+LOGO
+======================================== */
+
+.text-gradient {
+  background: linear-gradient(135deg, #000000, #404040, #737373);
+
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.dark .text-gradient {
+  background: linear-gradient(135deg, #ffffff, #d4d4d8, #71717a);
+
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ========================================
+GLASS
+======================================== */
+
+.glass {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+
+  background: rgba(255, 255, 255, 0.85);
+
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.dark .glass {
+  background: rgba(15, 15, 15, 0.8);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ========================================
+BUTTONS
+======================================== */
+
+.btn-primary {
+  background: linear-gradient(135deg, #000000, #262626);
+
+  color: white;
+
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+
+  background: linear-gradient(135deg, #18181b, #3f3f46);
+}
+
+.dark .btn-primary {
+  background: linear-gradient(135deg, #ffffff, #d4d4d8);
+
+  color: black;
+}
+
+/* ========================================
+MOVIE CARDS
+======================================== */
+
+.movie-card {
+  transition: all 0.4s ease;
+}
+
+.movie-card:hover {
+  transform: translateY(-8px);
+}
+
+.movie-card-glow:hover {
+  box-shadow:
+    0 25px 60px rgba(0, 0, 0, 0.18),
+    0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+.dark .movie-card-glow:hover {
+  box-shadow: 0 25px 60px rgba(255, 255, 255, 0.08);
+}
+
+/* ========================================
+BADGES
+======================================== */
+
+.genre-badge {
+  background: #f4f4f5;
+  color: #27272a;
+  border: 1px solid #e4e4e7;
+}
+
+.dark .genre-badge {
+  background: rgba(255, 255, 255, 0.06);
+  color: #d4d4d8;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.rating-badge {
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(12px);
+  color: white;
+}
+
+.section-title {
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+
+.footer-gradient {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent),
+    var(--background);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    @apply font-sans;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
 }
