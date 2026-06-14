@@ -60,7 +60,6 @@ export default function Home() {
 
   return (
     <main>
-      {/* Latest Releases */}
       <section className="mx-auto max-w-7xl px-4 py-14 lg:px-6">
         <div className="mb-10">
           <h2 className="mt-2 text-4xl font-black tracking-tight">
